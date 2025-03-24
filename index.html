@@ -1,25 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
   <title>A4 Task 2</title>
+  <meta charset="UTF-8">
 </head>
 <body>
-  <div id="flagOutput">TEST TEXT</div>
-
+  <h1>TEST TEXT</h1>
   <script>
-    function tryGetFlag() {
-      try {
-        let result = Android.getdate("flag"); 
-        document.getElementById("flagOutput").innerText = result;
-        console.log("Got flag from Android interface:", result);
-      } catch (e) {
-        console.log("Android interface not ready, retrying...");
-        setTimeout(tryGetFlag, 250); 
-      }
+    try {
+      const result = Android.getdate("flag"); // reflects the value of static field 'flag'
+      const flag = result.split("||")[0];
+      console.log("FLAG FROM JS:", flag); // this shows up in *task2's* logcat, not yours
+      Android.test(); // this also causes a logcat entry in task2, for syncing
+    } catch (e) {
+      console.log("ERROR:", e);
     }
-
-    tryGetFlag();
   </script>
 </body>
 </html>
