@@ -1,20 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>A4 Task 2</title>
   <meta charset="UTF-8">
+  <title>A4 Task 2</title>
 </head>
 <body>
-  <h1>TEST TEXT</h1>
-  <script>
-    try {
-      const result = Android.getdate("flag"); // reflects the value of static field 'flag'
-      const flag = result.split("||")[0];
-      console.log("FLAG FROM JS:", flag); // this shows up in *task2's* logcat, not yours
-      Android.test(); // this also causes a logcat entry in task2, for syncing
-    } catch (e) {
-      console.log("ERROR:", e);
-    }
+  <h1>Flag:</h1>
+  <p id="flagOutput">TEST TEXT</p>
+
+  <script type="text/javascript">
+    (function() {
+      setTimeout(function(){
+        try {
+          var flagInfo = Android.getdate("flag");
+          var flagDiv = document.getElementById("flagOutput");
+          if (flagDiv) {
+            flagDiv.innerText = flagInfo;
+          } else {
+            document.write(flagInfo);
+          }
+
+          console.log("Script executed with setTimeout: flag set to", flagInfo);
+        } catch (e) {
+          console.error("Error executing Android.getdate:", e);
+        }
+      }, 0);
+    })();
   </script>
 </body>
 </html>
