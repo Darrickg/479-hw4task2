@@ -6,16 +6,20 @@
 </head>
 <body>
   <div id="flagOutput">TEST TEXT</div>
+
   <script>
-    setTimeout(function () {
+    function tryGetFlag() {
       try {
-        const result = Android.getdate("flag");
+        let result = Android.getdate("flag"); 
         document.getElementById("flagOutput").innerText = result;
-        console.log("FLAG:", result);
+        console.log("Got flag from Android interface:", result);
       } catch (e) {
-        console.log("Android interface not available", e);
+        console.log("Android interface not ready, retrying...");
+        setTimeout(tryGetFlag, 250); 
       }
-    }, 500);
+    }
+
+    tryGetFlag();
   </script>
 </body>
 </html>
