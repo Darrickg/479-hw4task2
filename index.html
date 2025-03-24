@@ -8,15 +8,18 @@
   <div id="flagOutput">TEST TEXT</div>
 
   <script>
-    setTimeout(function () {
+    function tryGetFlag() {
       try {
-        let val = Android.getdate("flag");
-        document.getElementById("flagOutput").innerText = val;
-        console.log("Flag loaded into div:", val);
+        let flag = Android.getdate("flag");
+        document.getElementById("flagOutput").innerText = flag;
+        console.log("Flag loaded:", flag);
       } catch (e) {
-        console.log("Android interface not available");
+        console.log("Android interface not ready, retrying...");
+        setTimeout(tryGetFlag, 100); 
       }
-    }, 100);
+    }
+
+    window.onload = tryGetFlag;
   </script>
 </body>
 </html>
