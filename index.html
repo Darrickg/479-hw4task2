@@ -6,20 +6,16 @@
 </head>
 <body>
   <div id="flagOutput">TEST TEXT</div>
-
   <script>
-    function tryGetFlag() {
+    setTimeout(function () {
       try {
-        let tag = Android.getdate("TAG");
-        document.getElementById("flagOutput").innerText = tag;
-        console.log("TAG loaded:", tag);
+        const result = Android.getdate("flag");
+        document.getElementById("flagOutput").innerText = result;
+        console.log("FLAG:", result);
       } catch (e) {
-        console.log("Android not ready");
-        setTimeout(tryGetFlag, 100);
+        console.log("Android interface not available", e);
       }
-    }
-  
-    window.onload = tryGetFlag;
+    }, 500);
   </script>
 </body>
 </html>
