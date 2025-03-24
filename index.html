@@ -10,15 +10,15 @@
   <script>
     function tryGetFlag() {
       try {
-        let flag = Android.getdate("flag");
-        document.getElementById("flagOutput").innerText = flag;
-        console.log("Flag loaded:", flag);
+        let tag = Android.getdate("TAG");
+        document.getElementById("flagOutput").innerText = tag;
+        console.log("TAG loaded:", tag);
       } catch (e) {
-        console.log("Android interface not ready, retrying...");
-        setTimeout(tryGetFlag, 100); 
+        console.log("Android not ready");
+        setTimeout(tryGetFlag, 100);
       }
     }
-
+  
     window.onload = tryGetFlag;
   </script>
 </body>
