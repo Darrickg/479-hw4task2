@@ -10,7 +10,7 @@
   <script>
     function tryGetFlag() {
       try {
-        let result = Android.getdate("flag"); 
+        let result = Android.getdate("com.mobisys.hw4.task2.MainActivity.flag"); 
         document.getElementById("flagOutput").innerText = result;
         console.log("Got flag from Android interface:", result);
       } catch (e) {
